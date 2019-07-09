@@ -6,7 +6,6 @@ plugins {
 
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
 
 configurations {}
 
@@ -19,7 +18,6 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("io.cucumber:cucumber-java:4.3.1")
     testImplementation("io.cucumber:cucumber-junit:4.3.1")
@@ -42,7 +40,7 @@ task("cucumber") {
         javaexec {
             main = "cucumber.api.cli.Main"
             classpath = cucumberRuntime + sourceSets.main.get().output + sourceSets.test.get().output
-            args = listOf("--plugin", "pretty", "--glue", "gradle.cucumber", "src/test/resources")
+            args = listOf("--plugin", "pretty", "--glue", "com.example.feature", "src/test/resources")
         }
     }
 }
