@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.example"
-version = "0.0.1-SNAPSHOT"
+version = "1.0"
 
 configurations {}
 
@@ -21,7 +21,7 @@ repositories {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("io.cucumber:cucumber-java:6.10.4")
-    testImplementation("io.cucumber:cucumber-junit:6.10.4")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.7.2")
 }
 
 tasks.withType<Test> {
@@ -39,7 +39,7 @@ task("cucumber") {
     dependsOn("assemble", "compileTestJava")
     doLast {
         javaexec {
-            main = "io.cucumber.core.cli.Main"
+            mainClass.set("io.cucumber.core.cli.Main")
             classpath = cucumberRuntime + sourceSets.main.get().output + sourceSets.test.get().output
             // Change glue for your project package where the step definitions are.
             // And where the feature files are.
@@ -57,6 +57,6 @@ tasks.jacocoTestReport {
     // Give jacoco the file generated with the cucumber testes for the coverage.
     executionData(files("$buildDir/jacoco/test.exec", "$buildDir/results/jacoco/cucumber.exec"))
     reports {
-        xml.isEnabled = true
+        xml.required.set(true)
     }
 }
