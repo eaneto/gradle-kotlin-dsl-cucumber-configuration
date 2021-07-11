@@ -1,6 +1,8 @@
 # Gradle Kotlin DSL cucumber configuration
 
-Example of how to configure cucumber and jacoco using Gradle 5+ with the Kotlin DSL.
+[![codecov](https://codecov.io/gh/eaneto/gradle-kotlin-dsl-cucumber-configuration/branch/master/graph/badge.svg)](https://codecov.io/gh/eaneto/gradle-kotlin-dsl-cucumber-configuration)
+
+Example of how to configure cucumber and jacoco using Gradle 7+ with the Kotlin DSL.
 
 ## Why?
 
