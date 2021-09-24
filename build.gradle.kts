@@ -54,7 +54,7 @@ task("cucumber") {
 }
 
 tasks.jacocoTestReport {
-    // Give jacoco the file generated with the cucumber testes for the coverage.
+    // Give jacoco the file generated with the cucumber tests for the coverage.
     executionData(files("$buildDir/jacoco/test.exec", "$buildDir/results/jacoco/cucumber.exec"))
     reports {
         xml.required.set(true)
