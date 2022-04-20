@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     jacoco
-    kotlin("jvm") version "1.6.20"
+    kotlin("jvm") version "1.6.21"
 }
 
 group = "com.example"
