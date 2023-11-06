@@ -21,7 +21,7 @@ repositories {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("io.cucumber:cucumber-java:7.14.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.1")
 }
 
 tasks.withType<Test> {
