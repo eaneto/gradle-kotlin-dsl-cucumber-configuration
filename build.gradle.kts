@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -22,6 +23,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("io.cucumber:cucumber-java:7.21.1")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.11.4")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks.withType<Test> {
@@ -29,16 +31,16 @@ tasks.withType<Test> {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions {
+    compilerOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "11"
+        jvmTarget.set(JvmTarget.JVM_17)
     }
 }
 
-task("cucumber") {
+tasks.register("cucumber") {
     dependsOn("assemble", "compileTestJava")
     doLast {
-        javaexec {
+        providers.javaexec {
             mainClass.set("io.cucumber.core.cli.Main")
             classpath = cucumberRuntime + sourceSets.main.get().output + sourceSets.test.get().output
             // Change glue for your project package where the step definitions are.
@@ -48,14 +50,20 @@ task("cucumber") {
             val jacocoAgent = zipTree(configurations.jacocoAgent.get().singleFile)
                 .filter { it.name == "jacocoagent.jar" }
                 .singleFile
-            jvmArgs = listOf("-javaagent:$jacocoAgent=destfile=$buildDir/results/jacoco/cucumber.exec,append=false")
+            jvmArgs =
+                listOf("-javaagent:$jacocoAgent=destfile=${layout.buildDirectory}/results/jacoco/cucumber.exec,append=false")
         }
     }
 }
 
 tasks.jacocoTestReport {
     // Give jacoco the file generated with the cucumber tests for the coverage.
-    executionData(files("$buildDir/jacoco/test.exec", "$buildDir/results/jacoco/cucumber.exec"))
+    executionData(
+        files(
+            "${layout.buildDirectory}/jacoco/test.exec",
+            "${layout.buildDirectory}/results/jacoco/cucumber.exec"
+        )
+    )
     reports {
         xml.required.set(true)
     }
