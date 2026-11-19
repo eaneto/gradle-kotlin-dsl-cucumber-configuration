@@ -11,7 +11,7 @@ version = "1.0"
 
 configurations {}
 
-val cucumberRuntime by configurations.creating {
+val cucumberRuntime = configurations.create("cucumberRuntime") {
     extendsFrom(configurations["testImplementation"])
 }
 
@@ -33,7 +33,7 @@ tasks.withType<Test> {
 tasks.withType<KotlinCompile> {
     compilerOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget.set(JvmTarget.JVM_17)
+        jvmTarget.set(JvmTarget.JVM_25)
     }
 }
 
