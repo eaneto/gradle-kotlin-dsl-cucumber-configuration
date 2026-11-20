@@ -21,7 +21,7 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    testImplementation("io.cucumber:cucumber-java:8.0.4")
+    testImplementation("io.cucumber:cucumber-java:8.1.0")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:6.1.3")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
